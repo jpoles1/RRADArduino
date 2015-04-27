@@ -7,6 +7,7 @@ Desktop.ini
 hub/json
 hub/node/node_modules
 **/.idea
+**/application.linux*
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
