@@ -218,7 +218,6 @@ void loop(void){
     if(dccount>=dctime){
       printf("Disconnected");
       scrRef(66);
-      asm volatile ("  jmp 0");
     }
     dccount++;
     scrct++;
