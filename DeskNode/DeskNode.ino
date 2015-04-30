@@ -41,7 +41,7 @@ int butpin = 5;
 int pirtime = 250;
 int radtime = 50;
 int scrtime = 100;
-int dctime = 500;
+int dctime = 2000;
 int sent = 3;
 payload_t dat;
 int pir = 0;
@@ -163,7 +163,8 @@ void setup(void){
   radio.begin();
   radio.enableDynamicPayloads();
   // optionally, increase the delay between retries & # of retries
-  radio.setRetries(15,15);
+  //radio.setRetries(15,15);
+  radio.setAutoAck(false);
   radio.openWritingPipe(pipes[0]);
   radio.openReadingPipe(1,pipes[1]);
   radio.openReadingPipe(3,pipes[2]);
