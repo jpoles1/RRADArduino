@@ -31,7 +31,8 @@ void setup(void){
   radio.begin();
   radio.enableDynamicPayloads();
   // optionally, increase the delay between retries & # of retries
-  radio.setRetries(15,15);
+  //radio.setRetries(15,15);
+  radio.setAutoAck(false);
   radio.openWritingPipe(pipes[0]);
   radio.openReadingPipe(1,pipes[1]);
   radio.openReadingPipe(2,pipes[2]);
@@ -41,16 +42,19 @@ void setup(void){
 }
 void loop(void){
     int temp;
+    int hum;
     int chk = DHT11.read(DHT11PIN);
     if(chk==DHTLIB_OK){
        temp = int(Fahrenheit(DHT11.temperature));
+       hum = int(DHT11.humidity);
     }
     else{
       temp = 666;
+      hum = 666;
     }
     int light = analogRead(6);
     int pir = digitalRead(6);
-    payload_t dat = {(int)1, temp, light, pir};
+    payload_t dat = {(int)1, temp, light, pir, hum};
     radio.stopListening();
     int wr = radio.write(&dat, sizeof(dat));
     radio.startListening();
