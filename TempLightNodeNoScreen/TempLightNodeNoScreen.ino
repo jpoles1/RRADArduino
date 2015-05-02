@@ -54,14 +54,14 @@ void loop(void){
     }
     int light = analogRead(6);
     int pir = digitalRead(6);
-    payload_t dat = {(int)1, temp, light, pir, hum};
+    payload_t dat = {(int)1, temp, light, pir, hum, 1};
     radio.stopListening();
     int wr = radio.write(&dat, sizeof(dat));
     radio.startListening();
     delay(5000);
-    if(wr==1){
-       printf("Sent\n");
-      delay(30000);
+    if(wr==true){
+       printf("Sent temp=%d; hum=%d; light=:%d; pir=%d; Status=%d\n", temp, hum, light, pir, wr);
+      delay(300000);
     }
     else{
       printf("Sending Failed\n");
